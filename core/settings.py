@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'jobs',
+    'resumes',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL='accounts.User'
+MEDIA_URL='/media/'
+MEDIA_ROOT=BASE_DIR/'media'
