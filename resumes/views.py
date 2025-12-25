@@ -27,8 +27,16 @@ class ResumeUploadAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
+        resume.refresh_from_db()
+        file_path=resume.resume_file.path
+        from .utils import extract_text_from_pdf
+        text=extract_text_from_pdf(file_path)
+        resume.extracted_text=text
+        resume.save()
 
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED if created else status.HTTP_200_OK
         )
+
+
